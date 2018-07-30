@@ -7,23 +7,24 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
 import { appReducers, appMetaReducers } from './app.store';
 import { environment } from '../environments/environment';
+import { AppComponent } from './core/app/app.component';
+import { BooksModule } from './books/books.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AuthModule,
     AppRoutingModule,
+    AuthModule,
+    CoreModule,
+    BooksModule,
     StoreModule.forRoot(appReducers, { metaReducers: appMetaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument({maxAge: 50}) : [],
     EffectsModule.forRoot([]),
