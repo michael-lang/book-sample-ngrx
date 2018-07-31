@@ -14,6 +14,10 @@ import { BookPreviewComponent } from './book-preview/book-preview.component';
 import { BookPreviewListComponent } from './book-preview-list/book-preview-list.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { BookAuthorsComponent } from './book-authors/book-authors.component';
+import { CollectionPageComponent } from './collection-page/collection-page.component';
+import { FindBookPageComponent } from './find-book-page/find-book-page.component';
+import { SelectedBookPageComponent } from './selected-book-page/selected-book-page.component';
+import { ViewBookPageComponent } from './view-book-page/view-book-page.component';
 
 @NgModule({
   imports: [
@@ -26,6 +30,16 @@ import { BookAuthorsComponent } from './book-authors/book-authors.component';
     StoreModule.forFeature('books', booksFeatureReducer),
     EffectsModule.forFeature([]), // TODO: add effects for books
   ],
-  declarations: [BookSearchComponent, BookPreviewComponent, BookPreviewListComponent, BookDetailComponent, BookAuthorsComponent]
+  declarations: [
+    BookSearchComponent,
+    BookPreviewComponent,
+    BookPreviewListComponent,
+    BookDetailComponent,
+    BookAuthorsComponent,
+    CollectionPageComponent,
+    FindBookPageComponent,
+    SelectedBookPageComponent,
+    ViewBookPageComponent
+  ]
 })
 export class BooksModule { }

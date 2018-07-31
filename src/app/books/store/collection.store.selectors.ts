@@ -28,7 +28,7 @@ export const selectCollectionBookIds = createSelector(
   getIds
 );
 
-export const getBookCollection = createSelector(
+export const selectBookCollection = createSelector(
   getBookEntities,
   selectCollectionBookIds,
   (entities, ids) => {
