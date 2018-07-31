@@ -2,11 +2,12 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { MatInputModule, MatCardModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { StoreModule, Store, combineReducers } from '@ngrx/store';
+import { StoreModule, Store } from '@ngrx/store';
 import { LoginPageComponent } from './login-page.component';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { AuthAppState, authFeatureReducer, authStatusActions } from '../store/auth.store';
 import { appReducers } from '../../app.store';
+import { loginPageActions } from './store/login-page.store';
 
 describe('Login Page', () => {
   let fixture: ComponentFixture<LoginPageComponent>;
@@ -58,7 +59,7 @@ describe('Login Page', () => {
 
   it('should dispatch a login event on submit', () => {
     const $event: any = {};
-    const action = authStatusActions.create(authStatusActions.login, $event);
+    const action = loginPageActions.create(loginPageActions.login, $event);
 
     instance.onSubmit($event);
 

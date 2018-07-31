@@ -19,6 +19,8 @@ import { FindBookPageComponent } from './find-book-page/find-book-page.component
 import { SelectedBookPageComponent } from './selected-book-page/selected-book-page.component';
 import { ViewBookPageComponent } from './view-book-page/view-book-page.component';
 import { BookExistsGuard } from './book-exists.guard';
+import { CollectionEffects } from './store/collection.store.effects';
+import { BookEffects } from './store/book.store.effects';
 
 @NgModule({
   imports: [
@@ -29,7 +31,7 @@ import { BookExistsGuard } from './book-exists.guard';
     PipesModule,
     BooksRoutingModule,
     StoreModule.forFeature('books', booksFeatureReducer),
-    EffectsModule.forFeature([]), // TODO: add effects for books
+    EffectsModule.forFeature([CollectionEffects, BookEffects]),
   ],
   declarations: [
     BookSearchComponent,
