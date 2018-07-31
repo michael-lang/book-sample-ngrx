@@ -1,6 +1,7 @@
-import { FeatureReducer } from 'src/lib/feature-reducer';
-import { ActionReducer } from 'src/lib/action-decorator';
+
 import { Action } from '@ngrx/store';
+import { FeatureActions } from 'src/lib/feature-actions';
+import { FeatureAction } from 'src/lib/feature-action-decorator';
 
 export interface LoginPageState {
   error: string | null;
@@ -12,8 +13,8 @@ export const initialLoginPageState: LoginPageState = {
   pending: false,
 };
 
-export class LoginPageReducer extends FeatureReducer<LoginPageState> {
-  @ActionReducer<LoginPageState>()
+export class LoginPageActions extends FeatureActions<LoginPageState> {
+  @FeatureAction<LoginPageState>()
   login(state: LoginPageState, none: any) {
     return {
       ...state,
@@ -21,7 +22,7 @@ export class LoginPageReducer extends FeatureReducer<LoginPageState> {
       pending: true,
     };
   }
-  @ActionReducer<LoginPageState>()
+  @FeatureAction<LoginPageState>()
   loginSuccess(state: LoginPageState, none: any) {
     return {
       ...state,
@@ -29,7 +30,7 @@ export class LoginPageReducer extends FeatureReducer<LoginPageState> {
       pending: false,
     };
   }
-  @ActionReducer<LoginPageState>()
+  @FeatureAction<LoginPageState>()
   loginFailure(state: LoginPageState, error: any) {
     return {
       ...state,
@@ -38,8 +39,8 @@ export class LoginPageReducer extends FeatureReducer<LoginPageState> {
     };
   }
 }
-export const loginPage = new LoginPageReducer();
-const reducer = FeatureReducer.createReducer(initialLoginPageState, loginPage);
+export const loginPageActions = new LoginPageActions();
+const reducer = FeatureActions.createReducer(initialLoginPageState, loginPageActions);
 export function loginPageReducer(state: LoginPageState, action: Action): LoginPageState {
   return reducer(state, action);
 }

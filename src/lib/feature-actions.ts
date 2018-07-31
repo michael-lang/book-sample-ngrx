@@ -1,9 +1,9 @@
-import { getActionMetadataEntries, getActionMetadataEntry } from './action-decorator';
+import { getActionMetadataEntries, getActionMetadataEntry } from './feature-action-decorator';
 import { TPAction } from './effects';
 import { Action } from '@ngrx/store';
 
-export class FeatureReducer<TState> {
-  static createReducer<TState>(initialState: TState, inst: FeatureReducer<TState>)
+export class FeatureActions<TState> {
+  static createReducer<TState>(initialState: TState, inst: FeatureActions<TState>)
     : (state: TState, action: Action) => TState {
       const handlers: {
         [key: string]: (state: TState, action: Action) => TState

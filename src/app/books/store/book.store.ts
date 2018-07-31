@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { Action, combineReducers, ActionReducer as ngrxActionReducer } from '@ngrx/store';
-import { FeatureReducer } from 'src/lib/feature-reducer';
-import { ActionReducer } from 'src/lib/action-decorator';
+import { Action, combineReducers, ActionReducer } from '@ngrx/store';
+import { FeatureActions } from 'src/lib/feature-actions';
+import { FeatureAction } from 'src/lib/feature-action-decorator';
 import { Book } from '../books.models';
 import { CollectionState, collectionReducer } from './collection.store';
 import { AppState } from '../../app.store';
@@ -53,8 +53,8 @@ export interface BookFeatureAppState extends AppState {
   books: BookFeatureState;
 }
 
-export class BookReducer extends FeatureReducer<BookState> {
-  @ActionReducer<BookState>()
+export class BookActions extends FeatureActions<BookState> {
+  @FeatureAction<BookState>()
   search(state: BookState, query: string) {
     if (query === '') {
       return bookAdapter.removeAll({
@@ -73,7 +73,7 @@ export class BookReducer extends FeatureReducer<BookState> {
     };
   }
   // TODO: also trigger this with CollectionState.loadSuccess
-  @ActionReducer<BookState>()
+  @FeatureAction<BookState>()
   searchComplete(state: BookState, payload: Book[]) {
     /**
        * The addMany function provided by the created adapter
@@ -88,7 +88,7 @@ export class BookReducer extends FeatureReducer<BookState> {
         error: ''
       });
   }
-  @ActionReducer<BookState>()
+  @FeatureAction<BookState>()
   searchError(state: BookState, payload: string) {
     return {
       ...state,
@@ -96,7 +96,7 @@ export class BookReducer extends FeatureReducer<BookState> {
       error: payload,
     };
   }
-  @ActionReducer<BookState>()
+  @FeatureAction<BookState>()
   load(state: BookState, payload: Book) {
     /**
        * The addOne function provided by the created adapter
@@ -110,7 +110,7 @@ export class BookReducer extends FeatureReducer<BookState> {
         selectedBookId: state.selectedBookId,
       });
   }
-  @ActionReducer<BookState>()
+  @FeatureAction<BookState>()
   select(state: BookState, payload: string) {
     return {
       ...state,
@@ -118,13 +118,13 @@ export class BookReducer extends FeatureReducer<BookState> {
     };
   }
 }
-export const books = new BookReducer();
-const reducer = FeatureReducer.createReducer(initialBookState, books);
+export const bookActions = new BookActions();
+const reducer = FeatureActions.createReducer(initialBookState, bookActions);
 export function booksReducer(state: BookState, action: Action): BookState {
   return reducer(state, action);
 }
 
-const combinedReducer: ngrxActionReducer<any> = combineReducers({
+const combinedReducer: ActionReducer<any> = combineReducers({
   books: booksReducer,
   collection: collectionReducer
 });

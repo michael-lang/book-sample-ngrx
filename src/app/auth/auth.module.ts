@@ -7,8 +7,8 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { MaterialModule } from '../material/material.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { authReducer } from './store/auth.store';
-import { ReactiveFormsModule } from '../../../node_modules/@angular/forms';
+import { authFeatureReducer } from './store/auth.store';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const COMPONENTS = [LoginPageComponent, LoginFormComponent];
 
@@ -18,7 +18,7 @@ export const COMPONENTS = [LoginPageComponent, LoginFormComponent];
     ReactiveFormsModule,
     MaterialModule,
     AuthRoutingModule,
-    StoreModule.forFeature('auth', authReducer),
+    StoreModule.forFeature('auth', authFeatureReducer),
     EffectsModule.forFeature([]), // TODO: add effects for auth
   ],
   declarations: COMPONENTS,

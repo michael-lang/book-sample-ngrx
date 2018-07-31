@@ -1,7 +1,7 @@
 import { OperatorFunction, pipe } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { Action } from '@ngrx/store';
-import { getActionMetadataEntry, hasActionMetadataEntry } from './action-decorator';
+import { getActionMetadataEntry, hasActionMetadataEntry } from './feature-action-decorator';
 
 export interface TPAction<TP> extends Action {
   payload: TP;

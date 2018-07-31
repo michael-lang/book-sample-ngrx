@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
-import { FeatureReducer } from 'src/lib/feature-reducer';
-import { ActionReducer } from 'src/lib/action-decorator';
+import { FeatureActions } from 'src/lib/feature-actions';
+import { FeatureAction } from 'src/lib/feature-action-decorator';
 import { Book } from '../books.models';
 
 
@@ -16,12 +16,12 @@ const initialCollectionState: CollectionState = {
   ids: [],
 };
 
-export class CollectionReducer extends FeatureReducer<CollectionState> {
-  @ActionReducer<CollectionState>()
+export class CollectionActions extends FeatureActions<CollectionState> {
+  @FeatureAction<CollectionState>()
   addBook(state: CollectionState, payload: Book) {
     return state; // action is an effect trigger
   }
-  @ActionReducer<CollectionState>()
+  @FeatureAction<CollectionState>()
   addBookSuccess(state: CollectionState, payload: Book) {
     if (state.ids.indexOf(payload.id) > -1) {
       return state;
@@ -32,35 +32,35 @@ export class CollectionReducer extends FeatureReducer<CollectionState> {
       ids: [...state.ids, payload.id],
     };
   }
-  @ActionReducer<CollectionState>()
+  @FeatureAction<CollectionState>()
   addBookFail(state: CollectionState, payload: Book) {
     return this.removeBookSuccess(state, payload);
   }
 
-  @ActionReducer<CollectionState>()
+  @FeatureAction<CollectionState>()
   removeBook(state: CollectionState, payload: Book) {
     return state; // action is an effect trigger
   }
-  @ActionReducer<CollectionState>()
+  @FeatureAction<CollectionState>()
   removeBookSuccess(state: CollectionState, payload: Book) {
     return {
       ...state,
       ids: state.ids.filter(id => id !== payload.id),
     };
   }
-  @ActionReducer<CollectionState>()
+  @FeatureAction<CollectionState>()
   removeBookFail(state: CollectionState, payload: Book) {
     return this.addBookSuccess(state, payload);
   }
 
-  @ActionReducer<CollectionState>()
+  @FeatureAction<CollectionState>()
   load(state: CollectionState, payload: any) {
     return {
       ...state,
       loading: true,
     };
   }
-  @ActionReducer<CollectionState>()
+  @FeatureAction<CollectionState>()
   loadSuccess(state: CollectionState, payload: Book[]) {
     return {
       loaded: true,
@@ -68,14 +68,14 @@ export class CollectionReducer extends FeatureReducer<CollectionState> {
       ids: payload.map(book => book.id),
     };
   }
-  @ActionReducer<CollectionState>()
+  @FeatureAction<CollectionState>()
   loadFail(state: CollectionState, payload: any) {
     return state; // action is an effect trigger
   }
 }
 
-export const collection = new CollectionReducer();
-const reducer = FeatureReducer.createReducer(initialCollectionState, collection);
+export const collectionActions = new CollectionActions();
+const reducer = FeatureActions.createReducer(initialCollectionState, collectionActions);
 export function collectionReducer(state: CollectionState, action: Action): CollectionState {
   return reducer(state, action);
 }

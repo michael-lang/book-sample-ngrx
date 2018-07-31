@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { AppState } from '../../app.store';
 import { selectShowSidenav } from '../store/layout.store.selectors';
 import { selectLoggedIn } from '../../auth/store/auth.store.selectors';
-import { layoutReducer, LayoutReducer, layout } from '../store/layout.store';
-import { authStatus } from '../../auth/store/auth.store';
+import { layoutActions } from '../store/layout.store';
+import { authStatusActions } from '../../auth/store/auth.store';
 
 @Component({
   selector: 'app-root',
@@ -33,16 +33,16 @@ export class AppComponent {
      * updates and user interaction through the life of our
      * application.
      */
-    this.store.dispatch(layout.create(layout.closeSidenav, {}));
+    this.store.dispatch(layoutActions.create(layoutActions.closeSidenav, {}));
   }
 
   openSidenav() {
-    this.store.dispatch(layout.create(layout.openSidenav, {}));
+    this.store.dispatch(layoutActions.create(layoutActions.openSidenav, {}));
   }
 
   logout() {
     this.closeSidenav();
 
-    this.store.dispatch(authStatus.create(authStatus.logout, {}));
+    this.store.dispatch(authStatusActions.create(authStatusActions.logout, {}));
   }
 }

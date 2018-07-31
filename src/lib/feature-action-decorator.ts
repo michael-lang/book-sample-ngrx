@@ -1,4 +1,4 @@
-import { FeatureReducer } from './feature-reducer';
+import { FeatureActions } from './feature-actions';
 import { Action } from '@ngrx/store';
 
 const METADATA_KEY = '__store/actions__';
@@ -37,11 +37,11 @@ export function hasActionMetadataEntry<TState, TP>(
  * Gets all metadata entries for all actions on a reducer class.
  * Used to build a combined reducer function for action methods on a class.
  */
-export function getActionMetadataEntries<TState>(sourceProto: FeatureReducer<TState>): ActionMetadata<TState>[] {
+export function getActionMetadataEntries<TState>(sourceProto: FeatureActions<TState>): ActionMetadata<TState>[] {
   return (sourceProto as any).constructor[METADATA_KEY] || [];
 }
 function setActionMetadataEntry<TState, TP>(
-  sourceProto: FeatureReducer<TState>,
+  sourceProto: FeatureActions<TState>,
   actionProto: (state: TState, payload: TP) => TState,
   entry: ActionMetadata<TState>
 ) {
@@ -56,15 +56,15 @@ function setActionMetadataEntry<TState, TP>(
 
 /**
  * Can be applied to a property returning a function matching: (state: T, payload: {}) => T.
- * @example @ActionReducer<T>()
+ * @example @FeatureAction<T>()
  **/
-export function ActionReducer<TState>() {
+export function FeatureAction<TState>() {
   /**
    * @param target The prototype of the class containing the method/function
    * @param propertyKey The name of the method/function
    * @param descriptor The required signature of the method/function
    **/
-  return <T extends FeatureReducer<TState>, R extends (state: TState, payload: any) => TState>(
+  return <T extends FeatureActions<TState>, R extends (state: TState, payload: any) => TState>(
     target: T,
     name: string | symbol,
     descriptor: TypedPropertyDescriptor<(state: TState, payload: any) => TState>

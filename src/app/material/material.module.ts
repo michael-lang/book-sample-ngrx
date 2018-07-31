@@ -9,7 +9,6 @@ import {
   MatIconModule,
   MatToolbarModule,
   MatProgressSpinnerModule,
-  MatFormField,
 } from '@angular/material';
 
 @NgModule({

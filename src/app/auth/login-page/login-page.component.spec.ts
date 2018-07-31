@@ -5,7 +5,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule, Store, combineReducers } from '@ngrx/store';
 import { LoginPageComponent } from './login-page.component';
 import { LoginFormComponent } from '../login-form/login-form.component';
-import { AuthAppState, authReducer, authStatus } from '../store/auth.store';
+import { AuthAppState, authFeatureReducer, authStatusActions } from '../store/auth.store';
 import { appReducers } from '../../app.store';
 
 describe('Login Page', () => {
@@ -19,7 +19,7 @@ describe('Login Page', () => {
         NoopAnimationsModule,
         StoreModule.forRoot({
           ...appReducers,
-          auth: authReducer,
+          auth: authFeatureReducer,
         }),
         MatInputModule,
         MatCardModule,
@@ -58,7 +58,7 @@ describe('Login Page', () => {
 
   it('should dispatch a login event on submit', () => {
     const $event: any = {};
-    const action = authStatus.create(authStatus.login, $event);
+    const action = authStatusActions.create(authStatusActions.login, $event);
 
     instance.onSubmit($event);
 
