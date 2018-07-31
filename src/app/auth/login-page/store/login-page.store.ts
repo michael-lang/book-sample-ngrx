@@ -2,6 +2,7 @@
 import { Action } from '@ngrx/store';
 import { FeatureActions } from 'src/lib/feature-actions';
 import { FeatureAction } from 'src/lib/feature-action-decorator';
+import { Authenticate, User } from '../../auth.models';
 
 export interface LoginPageState {
   error: string | null;
@@ -15,7 +16,7 @@ export const initialLoginPageState: LoginPageState = {
 
 export class LoginPageActions extends FeatureActions<LoginPageState> {
   @FeatureAction<LoginPageState>()
-  login(state: LoginPageState, none: any) {
+  login(state: LoginPageState, payload: Authenticate) {
     return {
       ...state,
       error: null,
@@ -23,7 +24,7 @@ export class LoginPageActions extends FeatureActions<LoginPageState> {
     };
   }
   @FeatureAction<LoginPageState>()
-  loginSuccess(state: LoginPageState, none: any) {
+  loginSuccess(state: LoginPageState, payload: {user: User}) {
     return {
       ...state,
       error: null,

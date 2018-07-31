@@ -18,6 +18,7 @@ import { CollectionPageComponent } from './collection-page/collection-page.compo
 import { FindBookPageComponent } from './find-book-page/find-book-page.component';
 import { SelectedBookPageComponent } from './selected-book-page/selected-book-page.component';
 import { ViewBookPageComponent } from './view-book-page/view-book-page.component';
+import { BookExistsGuard } from './book-exists.guard';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { ViewBookPageComponent } from './view-book-page/view-book-page.component
     FindBookPageComponent,
     SelectedBookPageComponent,
     ViewBookPageComponent
-  ]
+  ],
+  providers: [BookExistsGuard]
 })
 export class BooksModule { }

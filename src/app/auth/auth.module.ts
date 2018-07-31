@@ -9,6 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { authFeatureReducer } from './store/auth.store';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthEffects } from './store/auth.store.effects';
 
 export const COMPONENTS = [LoginPageComponent, LoginFormComponent];
 
@@ -19,7 +20,7 @@ export const COMPONENTS = [LoginPageComponent, LoginFormComponent];
     MaterialModule,
     AuthRoutingModule,
     StoreModule.forFeature('auth', authFeatureReducer),
-    EffectsModule.forFeature([]), // TODO: add effects for auth
+    EffectsModule.forFeature([AuthEffects]),
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS,
