@@ -72,7 +72,15 @@ export class BookActions extends FeatureActions<BookState> {
       query,
     };
   }
-  // TODO: also trigger this with CollectionState.loadSuccess
+  /**
+   * This action is triggered both directly from a search, and through
+   * an effect after loading the user's collection. Therefore,
+   * do not replace the entities, but rather keep the prior loaded books
+   * and the new search results.
+   * If that is not the desired UX, it may be better to use a separate
+   * entities list for collection and search results, and then on
+   * search complete remove all prior results and add in only the new ones.
+   */
   @FeatureAction<BookState>()
   searchComplete(state: BookState, payload: Book[]) {
     /**

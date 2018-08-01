@@ -7,6 +7,7 @@ import { catchError, map, mergeMap, switchMap, toArray } from 'rxjs/operators';
 import { Book } from '../books.models';
 import { collectionActions } from './collection.store';
 import { ofAction } from 'src/lib/effects';
+import { bookActions } from './book.store';
 
 @Injectable()
 export class CollectionEffects {
@@ -35,6 +36,18 @@ export class CollectionEffects {
         catchError(error => of(collectionActions.create(collectionActions.loadFail, error)))
       )
     )
+  );
+
+  /**
+   * actions can trigger other actions. This is an alternative to switch statements in reducers
+   * in which multiple actions can respond to the same payload to affect different states
+   */
+  @Effect()
+  loadSuccess$ = this.actions$.pipe(
+    ofAction(collectionActions.loadSuccess),
+    switchMap((books) => {
+      return of(bookActions.create(bookActions.searchComplete, books));
+    })
   );
 
   @Effect()
