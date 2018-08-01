@@ -6,7 +6,7 @@ import { map, take } from 'rxjs/operators';
 import { selectLoggedIn, getLoggedIn } from '../store/auth.store.selectors';
 import { AuthAppState, authStatusActions } from '../store/auth.store';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AuthGuard implements CanActivate {
   constructor(private store: Store<AuthAppState>) {}
 
