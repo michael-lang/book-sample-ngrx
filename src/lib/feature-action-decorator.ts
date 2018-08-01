@@ -9,7 +9,7 @@ export interface ActionMetadata<TState> {
 }
 
 /**
- * Get the action metadata for a function decorated with @ActionReducer,
+ * Get the action metadata for a function decorated with @FeatureAction,
  * useful in dispatching a single action function via ngrx.
  * @param actionProto A property value returning a function of the required type
  */
@@ -21,7 +21,7 @@ export function getActionMetadataEntry<TState, TP>(
       const meta = (actionProto as any)[METADATA_KEY];
       return meta;
     }
-    throw Error('Action function is not registered, it must be decorated with @ActionReducer().');
+    throw Error('Action function is not registered, it must be decorated with @FeatureAction().');
 }
 export function hasActionMetadataEntry<TState, TP>(
   actionProto: (state: TState, payload: TP) => TState
@@ -70,12 +70,11 @@ export function FeatureAction<TState>() {
     descriptor: TypedPropertyDescriptor<(state: TState, payload: any) => TState>
   ) => {
     if (descriptor.value === undefined) {
-      console.error('Bad ActionReducer defined: ', target, name, descriptor);
-      throw Error('ActionReducer "' + name.toString() + '" function cannot be undefined!?');
+      console.error('Bad FeatureAction defined: ', target, name, descriptor);
+      throw Error('FeatureAction "' + name.toString() + '" function cannot be undefined!?');
     }
     const className = target.constructor.name;
     const metadata = {actionName: `[${className}] ${name.toString()}`, action: descriptor.value};
-    // console.log('ActionReducer defined: ', metadata);
     setActionMetadataEntry<TState, any>(target, descriptor.value, metadata);
   };
 }
