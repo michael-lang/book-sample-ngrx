@@ -5,6 +5,7 @@ import { Book } from '../books.models';
 import { BookFeatureAppState } from '../store/book.store';
 import { selectBookCollection } from '../store/collection.store.selectors';
 import { collectionActions } from '../store/collection.store';
+import { featureAction } from 'src/lib/feature-actions';
 
 @Component({
   selector: 'app-collection-page',
@@ -20,6 +21,6 @@ export class CollectionPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(collectionActions.create(collectionActions.load, undefined));
+    this.store.dispatch(featureAction(collectionActions.load, undefined));
   }
 }

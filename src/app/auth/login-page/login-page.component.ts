@@ -4,6 +4,7 @@ import { Authenticate } from '../auth.models';
 import { selectLoginPagePending, selectLoginPageError } from './store/login-page.store.selectors';
 import { AuthAppState } from '../store/auth.store';
 import { loginPageActions } from './store/login-page.store';
+import { featureAction } from 'src/lib/feature-actions';
 
 @Component({
   selector: 'app-login-page',
@@ -19,6 +20,6 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit($event: Authenticate) {
-    this.store.dispatch(loginPageActions.create(loginPageActions.login, $event));
+    this.store.dispatch(featureAction(loginPageActions.login, $event));
   }
 }

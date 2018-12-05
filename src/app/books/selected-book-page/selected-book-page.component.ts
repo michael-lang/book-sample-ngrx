@@ -6,6 +6,7 @@ import { BookFeatureAppState } from '../store/book.store';
 import { selectSelectedBook } from '../store/book.store.selectors';
 import { isSelectedBookInCollection } from '../store/collection.store.selectors';
 import { collectionActions } from '../store/collection.store';
+import { featureAction } from 'src/lib/feature-actions';
 
 @Component({
   selector: 'app-selected-book-page',
@@ -24,10 +25,10 @@ export class SelectedBookPageComponent {
   }
 
   addToCollection(book: Book) {
-    this.store.dispatch(collectionActions.create(collectionActions.addBook, book));
+    this.store.dispatch(featureAction(collectionActions.addBook, book));
   }
 
   removeFromCollection(book: Book) {
-    this.store.dispatch(collectionActions.create(collectionActions.removeBook, book));
+    this.store.dispatch(featureAction(collectionActions.removeBook, book));
   }
 }

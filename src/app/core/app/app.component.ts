@@ -6,6 +6,7 @@ import { selectShowSidenav } from '../store/layout.store.selectors';
 import { selectLoggedIn } from '../../auth/store/auth.store.selectors';
 import { layoutActions } from '../store/layout.store';
 import { authStatusActions } from '../../auth/store/auth.store';
+import { featureAction } from 'src/lib/feature-actions';
 
 @Component({
   selector: 'app-root',
@@ -33,16 +34,16 @@ export class AppComponent {
      * updates and user interaction through the life of our
      * application.
      */
-    this.store.dispatch(layoutActions.create(layoutActions.closeSidenav, {}));
+    this.store.dispatch(featureAction(layoutActions.closeSidenav, {}));
   }
 
   openSidenav() {
-    this.store.dispatch(layoutActions.create(layoutActions.openSidenav, {}));
+    this.store.dispatch(featureAction(layoutActions.openSidenav, {}));
   }
 
   logout() {
     this.closeSidenav();
 
-    this.store.dispatch(authStatusActions.create(authStatusActions.logout, {}));
+    this.store.dispatch(featureAction(authStatusActions.logout, {}));
   }
 }

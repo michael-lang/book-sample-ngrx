@@ -27,3 +27,11 @@ export class FeatureActions<TState> {
     return { type: actionMetadata.actionName, payload: payload };
   }
 }
+
+export function featureAction<TP, TState>(
+  action: (state: TState, payload: TP) => TState,
+  payload: TP
+): TPAction<TP> {
+  const actionMetadata = getActionMetadataEntry(action);
+  return { type: actionMetadata.actionName, payload: payload };
+}

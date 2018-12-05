@@ -7,6 +7,7 @@ import { BookFeatureAppState, bookActions } from './store/book.store';
 import { GoogleBooksService } from '../core/services/google-books.service';
 import { selectCollectionLoaded } from './store/collection.store.selectors';
 import { getBookEntities } from './store/book.store.selectors';
+import { featureAction } from 'src/lib/feature-actions';
 
 /**
  * Guards are hooks into the route resolution process, providing an opportunity
@@ -52,7 +53,7 @@ export class BookExistsGuard implements CanActivate {
    */
   hasBookInApi(id: string): Observable<boolean> {
     return this.googleBooks.retrieveBook(id).pipe(
-      map(bookEntity => bookActions.create(bookActions.load, bookEntity)),
+      map(bookEntity => featureAction(bookActions.load, bookEntity)),
       tap((action: Action) => this.store.dispatch(action)),
       map(book => !!book), // true, unless API error occurs
       catchError(() => {

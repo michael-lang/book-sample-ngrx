@@ -4,6 +4,7 @@ import { cold } from 'jasmine-marbles';
 import { AuthGuard } from './auth-guard.service';
 import { appReducers } from '../../app.store';
 import { authStatusActions, authFeatureReducer } from '../store/auth.store';
+import { featureAction } from 'src/lib/feature-actions';
 
 describe('Auth Guard', () => {
   let guard: AuthGuard;
@@ -33,7 +34,7 @@ describe('Auth Guard', () => {
 
   it('should return true if the user state is logged in', () => {
     const user: any = {};
-    const action = authStatusActions.create(authStatusActions.loginSuccess, { user });
+    const action = featureAction(authStatusActions.loginSuccess, { user });
     store.dispatch(action);
 
     const expected = cold('(a|)', { a: true });
