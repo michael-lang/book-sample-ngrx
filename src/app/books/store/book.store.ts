@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Action, combineReducers, ActionReducer } from '@ngrx/store';
 import { FeatureActions } from 'src/lib/feature-actions';
-import { FeatureAction } from 'src/lib/feature-action-decorator';
+import { FeatureAction, FeatureReducer } from 'src/lib/feature-action-decorator';
 import { Book } from '../books.models';
 import { CollectionState, collectionReducer } from './collection.store';
 import { AppState } from '../../app.store';
@@ -53,6 +53,7 @@ export interface BookFeatureAppState extends AppState {
   books: BookFeatureState;
 }
 
+@FeatureReducer('BookActions')
 export class BookActions extends FeatureActions<BookState> {
   @FeatureAction<BookState>()
   search(state: BookState, query: string) {

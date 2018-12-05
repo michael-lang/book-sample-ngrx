@@ -1,7 +1,7 @@
 
 import { Action } from '@ngrx/store';
 import { FeatureActions } from 'src/lib/feature-actions';
-import { FeatureAction } from 'src/lib/feature-action-decorator';
+import { FeatureAction, FeatureReducer } from 'src/lib/feature-action-decorator';
 import { Authenticate, User } from '../../auth.models';
 
 export interface LoginPageState {
@@ -14,6 +14,7 @@ export const initialLoginPageState: LoginPageState = {
   pending: false,
 };
 
+@FeatureReducer('LoginPageActions')
 export class LoginPageActions extends FeatureActions<LoginPageState> {
   @FeatureAction<LoginPageState>()
   login(state: LoginPageState, payload: Authenticate) {

@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { FeatureActions } from 'src/lib/feature-actions';
-import { FeatureAction } from 'src/lib/feature-action-decorator';
+import { FeatureAction, FeatureReducer } from 'src/lib/feature-action-decorator';
 
 export interface LayoutState {
   showSidenav: boolean;
@@ -10,6 +10,7 @@ const initialLayoutState: LayoutState = {
   showSidenav: false
 };
 
+@FeatureReducer('LayoutActions')
 export class LayoutActions extends FeatureActions<LayoutState> {
   @FeatureAction<LayoutState>()
   closeSidenav(state: LayoutState, payload: any) {

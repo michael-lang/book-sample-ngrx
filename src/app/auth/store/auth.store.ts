@@ -2,7 +2,7 @@ import { User, Authenticate } from '../auth.models';
 import { AppState } from '../../app.store';
 import { LoginPageState, loginPageReducer } from '../login-page/store/login-page.store';
 import { FeatureActions } from 'src/lib/feature-actions';
-import { FeatureAction } from 'src/lib/feature-action-decorator';
+import { FeatureAction, FeatureReducer } from 'src/lib/feature-action-decorator';
 import { Action, combineReducers, ActionReducer } from '@ngrx/store';
 
 export interface AuthStatusState {
@@ -24,6 +24,7 @@ export interface AuthAppState extends AppState {
   auth: AuthState;
 }
 
+@FeatureReducer('AuthStatusActions')
 export class AuthStatusActions extends FeatureActions<AuthStatusState> {
   @FeatureAction<AuthStatusState>()
   login(state: AuthStatusState, payload: Authenticate) {

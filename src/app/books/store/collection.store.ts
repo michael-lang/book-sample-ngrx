@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { FeatureActions } from 'src/lib/feature-actions';
-import { FeatureAction } from 'src/lib/feature-action-decorator';
+import { FeatureAction, FeatureReducer } from 'src/lib/feature-action-decorator';
 import { Book } from '../books.models';
 
 
@@ -16,6 +16,7 @@ const initialCollectionState: CollectionState = {
   ids: [],
 };
 
+@FeatureReducer('CollectionActions')
 export class CollectionActions extends FeatureActions<CollectionState> {
   @FeatureAction<CollectionState>()
   addBook(state: CollectionState, payload: Book) {
