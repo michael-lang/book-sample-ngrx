@@ -1,3 +1,7 @@
+This project is ARCHIVED as it is severely out of date example. Look for other more up-to-date repos I work on under Nexul Academy.
+
+https://github.com/NexulAcademy
+
 # BookSampleNgrx
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.1.
